@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  # default_url_options :host =>
+
   resources :friends
   namespace :api do
     namespace :v1 do
@@ -27,6 +30,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/invite', to: 'invitations#new'
+  post '/invite', to: 'invitations#create'
+
   get '/login', to: "sessions#new"
   post '/login', to: "sessions#create"
   delete '/logout', to: "sessions#destroy"
@@ -38,7 +44,13 @@ Rails.application.routes.draw do
   # Is this being used?
   get '/video', to: 'video#show'
 
-  resources :users, only: [:new, :create, :update, :edit]
+
+  get '/activation/:id', to: 'activation#update', as: 'activation'
+  resources :users do
+    member do
+      :confirm_email
+    end
+  end
 
   resources :tutorials, only: [:show, :index] do
     resources :videos, only: [:show, :index]

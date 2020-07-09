@@ -27,14 +27,12 @@ class User < ApplicationRecord
         github_user.save
   end
 
-
-  # def bookmarked_videos(tutorial_id)
-  #   videos.where(tutorial_id: tutorial_id).order(:tutorial_id, :position)
-  # end
-  #
-  # def user_tutorials
-  #   tutorial_ids = videos.pluck(:tutorial_id).uniq
-  #   Tutorial.find(tutorial_ids)
-  # end
+  def email_confirmed
+    if email_confirmation
+      "Active"
+    else
+      "Inactive"
+    end
+  end
 
 end
