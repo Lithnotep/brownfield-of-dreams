@@ -9,21 +9,21 @@ class Admin::VideosController < Admin::BaseController
   end
 
   def create
-    if params[:playlist_id] != nil
-      begin
-        search = YoutubeSearch.new
-        video_info = search.playlist_videos(params[:playlist_id])
-        tutorial = Tutorial.find(params[:tutorial_id])
-        video_info.each do |video|
-        video = tutorial.videos.new(video)
-        video.save
-        end
-        flash[:success] = "Successfully created tutorial. #{view_context.link_to('View it Here', "/tutorials/#{tutorial.id }")}."
-      # rescue StandardError
-      #   flash[:error] = 'Unable to create video.'
-        redirect_to admin_dashboard_path
-      end
-    else
+    # if params[:playlist_id] != nil
+    #   begin
+    #     search = YoutubeSearch.new
+    #     video_info = search.playlist_videos(params[:playlist_id])
+    #     tutorial = Tutorial.find(params[:tutorial_id])
+    #     video_info.each do |video|
+    #     video = tutorial.videos.new(video)
+    #     video.save
+    #     end
+    #     flash[:success] = "Successfully created tutorial. #{view_context.link_to('View it Here', "/tutorials/#{tutorial.id }")}."
+    #   # rescue StandardError
+    #   #   flash[:error] = 'Unable to create video.'
+    #     redirect_to admin_dashboard_path
+    #   end
+    # else
       begin
         tutorial = Tutorial.find(params[:tutorial_id])
 

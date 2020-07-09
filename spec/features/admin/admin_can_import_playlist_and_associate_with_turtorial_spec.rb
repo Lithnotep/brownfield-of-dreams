@@ -18,19 +18,20 @@ feature "Admin can create turtorial playlist" do
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
     visit '/admin/tutorials/new'
+    click_on "Import YouTube Playlist"
 
-
-
-    # click_link('Import YouTube Playlist')
-    fill_in :playlist_id, with: "PL1Y67f0xPzdOq2FcpWnawJeyJ3ELUdBkJ"
-    click_button "Submit"
+    fill_in "tutorial[title]", with: "Greatest"
+    fill_in "tutorial[description]", with: "First Name"
+    fill_in "tutorial[thumbnail]", with: "https://i.ytimg.com/vi/qMkRHW9zE1c/hqdefault.jpg"
+    fill_in "tutorial[playlist_id]", with: "PL1Y67f0xPzdOq2FcpWnawJeyJ3ELUdBkJ"
+    click_on "Save"
     expect(current_path). to eql("/admin/dashboard")
     expect(page).to have_content("Successfully created tutorial. View it Here.")
     click_on "View it Here"
     expect(current_path). to eql("/tutorials/#{Tutorial.last.id}")
 
 
-    #expect(current_path).to eql '/admin/tutorials/#tutorial.first/new'
+
   end
 end
 
