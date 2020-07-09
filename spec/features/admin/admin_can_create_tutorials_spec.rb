@@ -11,6 +11,7 @@ describe 'An admin user can add tags to tutorials' do
     fill_in'tutorial[description]', with: "Grubbing down with the homies"
     fill_in'tutorial[thumbnail]', with: "https://i.ytimg.com/vi/qMkRHW9zE1c/hqdefault.jpg"
     click_on "Save"
-    expect(current_path).to eq(admin_dashboard_path)
+    visit admin_dashboard_path
+  
   end
 end
